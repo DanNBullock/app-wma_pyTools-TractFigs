@@ -3,6 +3,51 @@
 
 # [app name]
 
+<!-- brainlife-app:begin (generated from the App manifest; edit the manifest, not this block) -->
+
+> **Generates figures for each tract of a white matter classification with wma_pyTools: streamline anatomy plots, density GIFs, multi-tile density plots and endpoint fingerprint plots.**
+
+Loops over the tracts of a WMC, takes their streamlines from the tractogram and calls wma_pyTools visTools to make the selected figure types, using a parcellation or the FreeSurfer Destrieux parcellation to label streamline endpoints. Use it to produce quality-control and publication figures of segmented tracts. The README is an unfilled template.
+
+| | |
+|---|---|
+| 📥 **Inputs** | `neuro/track/tck` · `neuro/wmc` · `neuro/anat/t1w` (optional) · `neuro/freesurfer` (optional) · `neuro/parcellation/volume` (optional) |
+| 📤 **Outputs** | `generic/images` |
+| 🐳 **Container** | `brainlife/dipy:latest` |
+| ⚙️ **Resources** | 16 CPUs |
+| 🔗 **Run it** | [doi.org/10.25663/brainlife.app.638](https://doi.org/10.25663/brainlife.app.638) |
+
+#### 📥 Inputs
+
+| Input | Datatype | Required | Description |
+|---|---|---|---|
+| `tractogram` | `neuro/track/tck` | yes | Tractogram (.tck) the WMC was built from. |
+| `wmc` | `neuro/wmc` | yes | White matter classification defining the tracts to plot. |
+| `anat` | `neuro/anat/t1w` | no | Optional T1w used as the anatomical background of the figures. |
+| `freesurfer` | `neuro/freesurfer` | no | The 2009 freesurfer parcellation will be used for determining endpoint locations / identities for the purposes of the "fingerprint" plot (also, alternatively, as the color scheme selector for the streamline plot). |
+| `parc` | `neuro/parcellation/volume` | no | The desired parcellation to be used for labeled regions in the "fingerprint" plot (also, alternatively, as the color scheme selector for the streamline plot). WILL OVERRIDE FREESURFER INPUT. |
+
+#### 📤 Outputs
+
+| Output | Datatype | Description |
+|---|---|---|
+| `output` | `generic/images` | Folder of PNG and GIF figures for each tract. |
+
+<details>
+<summary><b>⚙️ Parameters</b> (5)</summary>
+
+| Parameter | Type | Default | Description |
+|---|---|---|---|
+| `spagettiFlag` | boolean | `true` | Produce general streamline anatomy plot (color-coded in accordance with morphological characteristics). |
+| `gifFlag` | boolean | `true` | Produce ensity GIFs |
+| `tileFlag` | boolean | `true` | Produce multi-tile density plots |
+| `fingerprintFlag` | boolean | `true` | Produce "fingerprint" plots (radial bar-plots indicating streamline termination locations). |
+| `inflateParam` | number | `2` | Whether or not to inflate the passed parcellation and, if so, by how many voxel iterations. |
+
+</details>
+
+<!-- brainlife-app:end -->
+
 ## Overview description
 
 This is where the description of the app goes.  Provide quick summaries of:
